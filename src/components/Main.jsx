@@ -1,6 +1,5 @@
 import { StyleSheet, View } from "react-native"
 import { Route, Routes, Navigate } from "react-router-native"
-
 import SignIn from "./SignIn"
 import RepositoryList from "./RepositoryList"
 import AppBar from "./AppBar"
@@ -11,9 +10,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
 })
-const onSubmit = () => {
-  console.log("logged in")
-}
 
 const Main = () => {
   return (
@@ -21,7 +17,7 @@ const Main = () => {
       <AppBar />
       <Routes>
         <Route path="/" element={<RepositoryList />} exact />
-        <Route path="/signin" element={<SignIn onSubmit={onSubmit} />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>

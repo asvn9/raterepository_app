@@ -1,8 +1,11 @@
 import Text from "./Text"
 import FormikTextInput from "./FormikTextInput"
-import { View, StyleSheet, Pressable, TouchableOpacity } from "react-native"
-import { Formik, isValid, isSubmitting } from "formik"
+import { View, StyleSheet, TouchableOpacity } from "react-native"
+import { Formik } from "formik"
 import * as yup from "yup"
+import useSignIn from "../hooks/useSignIn"
+import AuthStorage from "../utils/authStorage"
+import { useNavigate } from "react-router-native"
 
 const styles = StyleSheet.create({
   calculateButton: {
@@ -28,7 +31,19 @@ const validationSchema = yup.object().shape({
     .required("Password is required"),
 })
 
-const SignIn = ({ onSubmit }) => {
+const SignIn = () => {
+  const [signIn, result] = useSignIn()
+  const navigate = useNavigate()
+
+  const onSubmit = async (values) => {
+    const { username, password } = values
+    try {
+      await signIn({ username, password })
+      navigate("/")
+    } catch (e) {
+      console.log(e)
+    }
+  }
   return (
     <Formik
       initialValues={{ username: "", password: "" }}

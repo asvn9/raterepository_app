@@ -1,4 +1,4 @@
-import { View, Image} from "react-native"
+import { View, Image } from "react-native"
 import styles from "./styles"
 import Text from "./Text"
 
@@ -19,26 +19,40 @@ const RepositoryItem = ({ item }) => {
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: item.ownerAvatarUrl }} />
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{item.fullName}</Text>
-        <Text style={styles.description}>{item.description}</Text>
-        <Text style={styles.lang}>{item.language}</Text>
+        <Text testID="fullName" style={styles.title}>
+          {item.fullName}
+        </Text>
+        <Text testID="description" style={styles.description}>
+          {item.description}
+        </Text>
+        <Text testID="language" style={styles.lang}>
+          {item.language}
+        </Text>
         <View style={styles.infoContainer}>
           <View style={styles.info}>
-            <Text style={styles.label}>Forks</Text>
+            <Text testID="forkCount" style={styles.label}>
+              Forks
+            </Text>
             <Text style={styles.info}>{formatNumber(item.forksCount)}</Text>
           </View>
           <View style={styles.info}>
-            <Text style={styles.label}>Stars</Text>
+            <Text testID="starCount" style={styles.label}>
+              Stars
+            </Text>
             <Text style={styles.info}>
               {formatNumber(item.stargazersCount)}
             </Text>
           </View>
           <View style={styles.info}>
-            <Text style={styles.label}>Rating</Text>
+            <Text testID="rating" style={styles.label}>
+              Rating
+            </Text>
             <Text style={styles.info}>{item.ratingAverage}</Text>
           </View>
           <View style={styles.info}>
-            <Text style={styles.label}>Reviews</Text>
+            <Text testID="review" style={styles.label}>
+              Reviews
+            </Text>
             <Text style={styles.info}>{item.reviewCount}</Text>
           </View>
         </View>
