@@ -66,6 +66,19 @@ const AppBar = () => {
             <Text style={styles.title}>Sign In</Text>
           </Link>
         )}
+                {!loggedIn && (
+        <Link to="/signup">
+          <Text style={styles.title}>Sign up</Text>
+        </Link>
+      )}
+                <Link to="/createreview">
+          <Text style={styles.title}>Create a review</Text>
+        </Link>
+        {loggedIn && (
+        <Link to="/myreviews">
+          <Text style={styles.title}>My reviews</Text>
+        </Link>
+      )}
       </ScrollView>
     </View>
   )

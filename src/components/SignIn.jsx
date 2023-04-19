@@ -6,19 +6,7 @@ import * as yup from "yup"
 import useSignIn from "../hooks/useSignIn"
 import AuthStorage from "../utils/authStorage"
 import { useNavigate } from "react-router-native"
-
-const styles = StyleSheet.create({
-  calculateButton: {
-    backgroundColor: "blue",
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-    padding: 10,
-    borderRadius: 5,
-    textAlign: "center",
-    marginTop: 10,
-  },
-})
+import styles from "./styles"
 
 const validationSchema = yup.object().shape({
   username: yup

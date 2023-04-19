@@ -1,22 +1,44 @@
 import { useQuery } from "@apollo/client"
-import { GET_REPOSITORIES } from "../grqphql/queries"
+import { GET_REPOSITORIESS } from "../grqphql/queries"
 import Text from "../components/Text"
 
-const useRepositories = () => {
-  const { loading, error, data } = useQuery(GET_REPOSITORIES, {
+const useRepositories = ({first,orderBy, orderDirection, searchKeyword}) => {
+  const { loading, error, data, fetchMore, ...result } = useQuery(GET_REPOSITORIESS, {
+    variables: {
+      first,
+      orderBy,
+      orderDirection,
+      searchKeyword
+    },
     fetchPolicy: "cache-and-network",
-  })
+  });
 
-  if (loading) {
-    return <Text>Loading...</Text>
-  }
+  const repositories = data?.repositories?.edges?.map((edge) => edge.node) || [];
 
-  if (error) {
-    return <Text>Error: {error.message}</Text>
-  }
+  const handleFetchMore = () => {
+    const canFetchMore = !loading && data?.repositories?.pageInfo?.hasNextPage;
 
-  const repositories = data.repositories.edges.map((edge) => edge.node)
-  return { repositories }
-}
+    if (!canFetchMore) {
+      return;
+    }
+    console.log("fetching")
+    fetchMore({
+      variables: {
+        after: data?.repositories?.pageInfo?.endCursor,
+        orderBy,
+        orderDirection,
+        searchKeyword,
+      },
+    });
+  };
+  return {
+    loading,
+    error,
+    fetchMore: handleFetchMore,
+    repositories: data?.repositories?.edges?.map((edge) => edge.node),
+    ...result
+  };
+};
+
 
 export default useRepositories
