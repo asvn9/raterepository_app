@@ -1,26 +1,26 @@
 import { useState } from "react"
 import Text from "./Text"
 import FormikTextInput from "./FormikTextInput"
-import { View, StyleSheet, TouchableOpacity } from "react-native"
+import { View, TouchableOpacity } from "react-native"
 import { Formik } from "formik"
 import * as yup from "yup"
 import { useNavigate } from "react-router-native"
 import styles from "./styles"
 import { useMutation } from "@apollo/client"
-import { CREATE_REVIEW } from "../grqphql/queries"
+import { CREATE_REVIEW } from "../graphql/queries"
 
 const validationSchema = yup.object().shape({
   ownerName: yup
     .string()
     .required("Owner name is required")
     .test('required', 'Owner name is required', function(value) {
-        return value ? true : false;
+        return value ? true : false
       }),
   repositoryName: yup
     .string()
     .required("Repository name is required")
     .test('required', 'Repository name is required', function(value) {
-        return value ? true : false;
+        return value ? true : false
       }),
     rating: yup
     .number()
@@ -49,11 +49,11 @@ const CreateReview = () => {
                 }
             }
         })
-        console.log(data)
-        const firstPart = data.createReview.id.split(".")[1];
-        const secondPart = data.createReview.id.split(".")[2];
+   
+        const firstPart = data.createReview.id.split(".")[1]
+        const secondPart = data.createReview.id.split(".")[2]
         const repoId = firstPart + "." + secondPart
-        console.log(repoId)
+   
       navigate(`/${repoId}`)
     } catch (e) {
       console.log(e)

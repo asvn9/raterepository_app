@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/client"
-import { GET_REPOSITORIESS } from "../grqphql/queries"
-import Text from "../components/Text"
+import { GET_REPOSITORIESS } from "../graphql/queries"
 
 const useRepositories = ({first,orderBy, orderDirection, searchKeyword}) => {
   const { loading, error, data, fetchMore, ...result } = useQuery(GET_REPOSITORIESS, {
@@ -11,15 +10,13 @@ const useRepositories = ({first,orderBy, orderDirection, searchKeyword}) => {
       searchKeyword
     },
     fetchPolicy: "cache-and-network",
-  });
-
-  const repositories = data?.repositories?.edges?.map((edge) => edge.node) || [];
+  })
 
   const handleFetchMore = () => {
-    const canFetchMore = !loading && data?.repositories?.pageInfo?.hasNextPage;
-
+    const canFetchMore =  data?.repositories?.pageInfo?.hasNextPage
+    console.log("fetch?")
     if (!canFetchMore) {
-      return;
+      return
     }
     console.log("fetching")
     fetchMore({
@@ -29,16 +26,16 @@ const useRepositories = ({first,orderBy, orderDirection, searchKeyword}) => {
         orderDirection,
         searchKeyword,
       },
-    });
-  };
+    })
+  }
   return {
     loading,
     error,
     fetchMore: handleFetchMore,
     repositories: data?.repositories?.edges?.map((edge) => edge.node),
     ...result
-  };
-};
+  }
+}
 
 
 export default useRepositories

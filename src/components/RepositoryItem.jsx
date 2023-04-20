@@ -1,7 +1,6 @@
-import { View, Image, Pressable, TouchableOpacity, Linking } from "react-native"
+import { View, Image, TouchableOpacity, Linking } from "react-native"
 import styles from "./styles"
 import Text from "./Text"
-import {useNavigation} from 'react-router-native'
 
 const formatNumber = (num) => {
   const suffixes = ["", "k", "M", "B", "T"]
@@ -20,7 +19,6 @@ const RepositoryItem = ({ item, showButton }) => {
     Linking.openURL(item.url)
   }
   return (
-
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: item.ownerAvatarUrl }} />
       <View style={styles.textContainer}>
@@ -61,11 +59,12 @@ const RepositoryItem = ({ item, showButton }) => {
             <Text style={styles.info}>{item.reviewCount}</Text>
           </View>
         </View>
-        {showButton &&(
-        <TouchableOpacity onPress={handleUrlClick}>
+        {showButton && (
+          <TouchableOpacity onPress={handleUrlClick}>
             <Text style={styles.calculateButton2}>Open in Github</Text>
           </TouchableOpacity>
-        )}</View>
+        )}
+      </View>
     </View>
   )
 }

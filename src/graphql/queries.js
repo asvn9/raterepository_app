@@ -1,4 +1,4 @@
-import {gql, useMutation} from '@apollo/client'
+import {gql} from '@apollo/client'
 
 
 export const AUTHENTICATE = gql`
@@ -75,21 +75,29 @@ query Repository($id: ID!, $first: Int, $after: String) {
       reviewCount
       url
       reviews(first: $first, after: $after) {
+        totalCount
         edges {
           node {
             id
             text
             rating
             createdAt
+            repositoryId
             user {
               id
               username
             }
           }
+          cursor
+        }
+        pageInfo {
+          endCursor
+          startCursor
+          hasNextPage
+          }
         }
       }
     }
-  }
 `
 
 export const GET_REPOSITORIES = gql `
@@ -140,7 +148,7 @@ query Repositories($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirec
       }
     }
   }
-`;
+`
 
 
   export const ME = gql `
@@ -175,4 +183,4 @@ export const GET_REPOSITORIESS = gql`
       }
     }
   }
-`;
+`

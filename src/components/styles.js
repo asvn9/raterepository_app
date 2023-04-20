@@ -111,11 +111,11 @@ const styles = StyleSheet.create({
     reviewDetails: {
       flexDirection: 'column',
       marginLeft: 12,
-      padding:20
+      padding:20,
+      paddingBottom: 200
     },
     reviewItem: {
       flexDirection: 1,
-      flexDirection: 'column',
       marginBottom: 5,
     },
     username: {
@@ -124,6 +124,8 @@ const styles = StyleSheet.create({
     },
     reviewText: {
       marginBottom: 4,
+      marginRight:20,
+      width: '80%'
     },
     createdAtText: {
       color: '#666666',

@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from "react-router-native"
 import SignIn from "./SignIn"
 import RepositoryList from "./RepositoryList"
 import AppBar from "./AppBar"
-import { RepositoryDetail } from "./RepositoryDetail"
+import RepositoryDetail from "./RepositoryDetail"
 import CreateReview from './CreateReview'
 import SignUp from './SignUp'
 import MyReviews from './MyReviews'

@@ -1,4 +1,4 @@
-import { AUTHENTICATE } from "../grqphql/queries"
+import { AUTHENTICATE } from "../graphql/queries"
 import { useMutation } from "@apollo/client"
 import { useAuthStorage } from "./useAuthStorage"
 import { useApolloClient } from "@apollo/client"
@@ -12,10 +12,8 @@ const useSignIn = () => {
       variables: { credentials: { username, password } },
     })
     await authStorage.setAccessToken(data.authenticate.accessToken)
-    console.log(apolloClient.cache.extract())
     apolloClient.resetStore()
   }
-  console.log(apolloClient.cache.extract())
   return [signIn, result]
 }
 

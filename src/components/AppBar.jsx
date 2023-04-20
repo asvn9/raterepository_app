@@ -2,7 +2,7 @@ import { View, StyleSheet, Pressable, ScrollView } from "react-native"
 import Constants from "expo-constants"
 import { Link } from "react-router-native"
 import { useApolloClient, useQuery } from "@apollo/client"
-import { ME } from "../grqphql/queries"
+import { ME } from "../graphql/queries"
 import { useNavigate } from "react-router-native"
 import Text from "./Text"
 import { useAuthStorage } from "../hooks/useAuthStorage"
@@ -66,19 +66,19 @@ const AppBar = () => {
             <Text style={styles.title}>Sign In</Text>
           </Link>
         )}
-                {!loggedIn && (
-        <Link to="/signup">
-          <Text style={styles.title}>Sign up</Text>
-        </Link>
-      )}
-                <Link to="/createreview">
+        {!loggedIn && (
+          <Link to="/signup">
+            <Text style={styles.title}>Sign up</Text>
+          </Link>
+        )}
+        <Link to="/createreview">
           <Text style={styles.title}>Create a review</Text>
         </Link>
         {loggedIn && (
-        <Link to="/myreviews">
-          <Text style={styles.title}>My reviews</Text>
-        </Link>
-      )}
+          <Link to="/myreviews">
+            <Text style={styles.title}>My reviews</Text>
+          </Link>
+        )}
       </ScrollView>
     </View>
   )
